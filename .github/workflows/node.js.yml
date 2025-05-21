@@ -36,6 +36,8 @@ jobs:
           branch: gh-pages
           folder: build
           token: ${{ secrets.GH_PAGES_TOKEN }}
+          clean: true
+          force: true
 
 
 
