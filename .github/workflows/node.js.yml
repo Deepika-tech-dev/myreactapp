@@ -1,4 +1,4 @@
-name: React App CI
+name: Node.js React App CI
 
 on:
   push:
@@ -11,14 +11,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [18.x] # You can test against multiple versions like [16.x, 18.x]
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # or your version
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm ci
@@ -26,5 +30,5 @@ jobs:
       - name: Run tests
         run: npm test -- --watchAll=false
 
-      - name: Build app
+      - name: Build React app
         run: npm run build
